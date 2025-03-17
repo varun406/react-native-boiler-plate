@@ -9,7 +9,7 @@ const Tab = createBottomTabNavigator();
 
 const BottomNavigators = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator screenOptions={{headerShown: false, animation: 'shift'}}>
       <Tab.Screen name={screenName.BottomTab} component={StackNavigators} />
       <Tab.Screen name={screenName.Profile} component={Profile} />
     </Tab.Navigator>
