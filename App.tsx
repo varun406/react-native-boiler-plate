@@ -1,47 +1,26 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {Appearance, StyleSheet} from 'react-native';
-import './gesture-handler';
-
+import {Appearance} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 import DrawerNavigator from './src/navigators/DrawerNavigator';
+import RootNavigator from './src/navigators/RootNavigator';
+import {persistor, store} from './src/redux/store';
 
 function App(): React.JSX.Element {
   const colorScheme = Appearance.getColorScheme();
 
   console.log('>>', colorScheme);
+
   return (
-    <GestureHandlerRootView>
-      <NavigationContainer>
-        <DrawerNavigator />
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <GestureHandlerRootView style={{flex: 1}}>
+          <RootNavigator />
+        </GestureHandlerRootView>
+      </PersistGate>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
