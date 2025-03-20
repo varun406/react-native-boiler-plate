@@ -3,7 +3,6 @@ import {Appearance} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import DrawerNavigator from './src/navigators/DrawerNavigator';
 import RootNavigator from './src/navigators/RootNavigator';
 import {persistor, store} from './src/redux/store';
 

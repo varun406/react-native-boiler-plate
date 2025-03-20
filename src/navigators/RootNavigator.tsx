@@ -1,10 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import DrawerNavigator from './DrawerNavigator';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {ThemeProvider} from '../context/ThemeProvider';
 import {useAppSelector} from '../redux/store';
 import PublicStackNavigator from './PublicStackNavigator';
-import {ThemeProvider} from '../context/ThemeProvider';
+import StackNavigators from './StackNavigator';
+
+const RootStack = createNativeStackNavigator();
 
 const RootNavigator = () => {
   const {isLoggedIn} = useAppSelector(state => state.user);
@@ -12,7 +15,14 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <ThemeProvider>
-        {isLoggedIn ? <DrawerNavigator /> : <PublicStackNavigator />}
+        <RootStack.Navigator
+          screenOptions={{headerShown: false, animation: 'none'}}>
+          {isLoggedIn ? (
+            <RootStack.Screen name="AuthStack" component={StackNavigators} />
+          ) : (
+            <RootStack.Screen name="Public" component={PublicStackNavigator} />
+          )}
+        </RootStack.Navigator>
       </ThemeProvider>
     </NavigationContainer>
   );

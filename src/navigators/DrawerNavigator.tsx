@@ -1,22 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import screenName from '../constants/screenName';
-import Home from '../screens/home/Home';
-import BottomNavigators from './BottomNavigator';
-import Gallery from '../screens/gallery/Gallery';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 import CustomDrawer from '../components/CustomDrawer';
+import screenName from '../constants/screenName';
 import About from '../screens/about/About';
+import Home from '../screens/home/Home';
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerContent={props => <CustomDrawer {...props} />}>
-      <Drawer.Screen
-        name={screenName.HomeDrawer}
-        component={BottomNavigators}
-      />
+      <Drawer.Screen name={screenName.Home} component={Home} />
       <Drawer.Screen name={screenName.About} component={About} />
     </Drawer.Navigator>
   );
