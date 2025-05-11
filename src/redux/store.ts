@@ -9,7 +9,6 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import mmkvStorage from '../mmkv/storage';
 import counterSlice from './counter/counterSlice';
 import userSlice from './user/userSlice';
 
@@ -22,7 +21,7 @@ const rootReducer = combineReducers({
 // Persist config with MMKV storage
 const persistConfig = {
   key: 'root',
-  storage: mmkvStorage, // Use MMKV
+  storage: AsyncStorage, // Use MMKV
   exclude: ['counter'],
   blacklist: ['counter'],
 };
@@ -48,5 +47,6 @@ export type AppDispatch = typeof store.dispatch;
 
 // Correctly typed hooks
 import {useDispatch, useSelector} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();

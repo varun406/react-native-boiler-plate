@@ -7,4 +7,4 @@ export default {
   Login: 'Login',
   About: 'About',
   Settings: 'Settings',
-};
+} as const;

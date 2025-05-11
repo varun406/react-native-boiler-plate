@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export default (theme: any) =>
+const style = (theme: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -14,3 +14,5 @@ export default (theme: any) =>
       padding: 20,
     },
   });
+
+export default style as typeof style;

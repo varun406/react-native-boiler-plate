@@ -11,13 +11,18 @@ import Config from 'react-native-config';
 import {store, useAppDispatch, useAppSelector} from '../../redux/store';
 import {decrement, increment} from '../../redux/counter/counterSlice';
 import {addUsername} from '../../redux/user/userSlice';
-import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
-import screenName from '../../constants/screenName';
 import style from './styles';
 import {useThemedStyles} from '../../hooks/useThemeStyles';
+import toast from '../../helpers/toastHelper';
+import {navigate} from '../../helpers/navigationHelper';
+import screenName from '../../constants/screenName';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../navigators/types';
 
-const Home = ({navigation}) => {
-  const styles = useThemedStyles(style);
+const Home = ({
+  navigation,
+}: NativeStackScreenProps<RootStackParamList, typeof screenName.Home>) => {
+  const {styles} = useThemedStyles(style);
   const dispatch = useAppDispatch();
   const {value} = useAppSelector(state => state.counter);
   const {username} = useAppSelector(state => state.user);
@@ -29,6 +34,7 @@ const Home = ({navigation}) => {
     }
 
     dispatch(increment());
+    toast.success('Count incremented', 'you pressed increment');
   };
 
   return (

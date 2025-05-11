@@ -6,6 +6,7 @@ import {ThemeProvider} from '../context/ThemeProvider';
 import {useAppSelector} from '../redux/store';
 import PublicStackNavigator from './PublicStackNavigator';
 import StackNavigators from './StackNavigator';
+import {navigationRef} from '../helpers/navigationHelper';
 
 const RootStack = createNativeStackNavigator();
 
@@ -13,7 +14,7 @@ const RootNavigator = () => {
   const {isLoggedIn} = useAppSelector(state => state.user);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <ThemeProvider>
         <RootStack.Navigator
           screenOptions={{headerShown: false, animation: 'none'}}>
