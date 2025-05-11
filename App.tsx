@@ -11,6 +11,8 @@ import './gesture-handler';
 
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import DrawerNavigator from './src/navigators/DrawerNavigator';
+import {navigationRef} from './src/helpers/navigationHelper';
+import Toast from 'react-native-toast-message';
 
 function App(): React.JSX.Element {
   const colorScheme = Appearance.getColorScheme();
@@ -18,9 +20,10 @@ function App(): React.JSX.Element {
   console.log('>>', colorScheme);
   return (
     <GestureHandlerRootView>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <DrawerNavigator />
       </NavigationContainer>
+      <Toast />
     </GestureHandlerRootView>
   );
 }
