@@ -66,6 +66,13 @@ const Home = ({
           navigation.navigate(screenName.Settings);
         }}
       />
+
+      <Button
+        title="Drawer"
+        onPress={() => {
+          navigation?.openDrawer();
+        }}
+      />
     </View>
   );
 };

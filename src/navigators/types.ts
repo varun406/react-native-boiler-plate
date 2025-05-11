@@ -4,4 +4,5 @@ export type RootStackParamList = {
   Home: undefined;
   Gallery: undefined;
   Settings: undefined;
+  HomeDrawer: undefined;
 };

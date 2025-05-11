@@ -7,6 +7,7 @@ import {useAppSelector} from '../redux/store';
 import PublicStackNavigator from './PublicStackNavigator';
 import StackNavigators from './StackNavigator';
 import {navigationRef} from '../helpers/navigationHelper';
+import DrawerNavigator from './DrawerNavigator';
 
 const RootStack = createNativeStackNavigator();
 
@@ -14,18 +15,21 @@ const RootNavigator = () => {
   const {isLoggedIn} = useAppSelector(state => state.user);
 
   return (
-    <NavigationContainer ref={navigationRef}>
-      <ThemeProvider>
+    <ThemeProvider>
+      <NavigationContainer ref={navigationRef}>
         <RootStack.Navigator
           screenOptions={{headerShown: false, animation: 'none'}}>
           {isLoggedIn ? (
-            <RootStack.Screen name="AuthStack" component={StackNavigators} />
+            <RootStack.Screen
+              name="AuthStackDrawer"
+              component={DrawerNavigator}
+            />
           ) : (
             <RootStack.Screen name="Public" component={PublicStackNavigator} />
           )}
         </RootStack.Navigator>
-      </ThemeProvider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 };
 
