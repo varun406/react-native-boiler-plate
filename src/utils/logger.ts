@@ -1,6 +1,6 @@
 import Config from 'react-native-config';
 
-const log = (message: string, type: 'info' | 'error' | 'warn' = 'info') => {
+const logger = (message: string, type: 'info' | 'error' | 'warn' = 'info') => {
   if (Config.ENV !== 'prod') {
     // This will only run in development mode
     switch (type) {
@@ -18,4 +18,4 @@ const log = (message: string, type: 'info' | 'error' | 'warn' = 'info') => {
   }
 };
 
-export default log;
+export default logger;
