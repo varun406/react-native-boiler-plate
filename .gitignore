@@ -2,6 +2,13 @@
 #
 .DS_Store
 
+# env
+.env
+.env.*
+environments/.env.dev
+environments/.env.uat
+environments/.env.prod
+
 # Xcode
 #
 build/
