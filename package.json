@@ -12,7 +12,7 @@
     "dev:android": "cross-env ENVFILE=environments/.env.dev react-native run-android --mode=devDebug",
     "uat:android": "cross-env ENVFILE=environments/.env.uat react-native run-android --mode=uatDebug",
     "prod:android": "cross-env ENVFILE=environments/.env.prod react-native run-android --mode=prodDebug",
-    "dev:android-build": "cd android && chmod +x gradlew && ENVFILE=../environments/.env.dev ./gradlew assembleRelease",
+    "dev:android-build": "cd android && chmod +x gradlew && ENVFILE=../environments/.env.dev ./gradlew assembleDebug",
     "uat:android-build": "cd android && cross-env ENVFILE=environments/.env.uat --mode=uatRelease ./gradlew assembleRelease",
     "prod:android-build": "cd android && cross-env ENVFILE=environments/.env.prod --mode=prodRelease ./gradlew assembleRelease",
     "dev:android-debugBuild": "cd android && cross-env ENVFILE=environments/.env.dev --mode=devRelease ./gradlew assembleDebug",
