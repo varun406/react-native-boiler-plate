@@ -1,47 +1,44 @@
 name: Dev Firebase Distribution
 
 on:
-    push:
-        branches:
-            - dev
+  push:
+    branches:
+      - dev
 
 jobs:
-    build-and-distribute:
-        runs-on: ubuntu-latest
+  build-and-distribute:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@v3
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-            - name: Setup Node
-              uses: actions/setup-node@v3
-              with:
-                  node-version: 18
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-            - name: Install Dependencies
-              run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-            - name: Setup Java (Android)
-              uses: actions/setup-java@v3
-              with:
-                  distribution: "temurin"
-                  java-version: 17
+      - name: Setup Java (Android)
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: 17
 
-            - name: Install Firebase CLI
-              run: npm install -g firebase-tools
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
 
-            - name: Build Debug APK
-              run: |
-                  cd android
-                  chmod +x gradlew
-                  ./gradlew assembleDebug
+      - name: Build Debug APK
+        run: npm run dev:android-build
 
-            - name: Upload to Firebase
-              run: |
-                  firebase appdistribution:distribute \
-                  android/app/build/outputs/apk/debug/app-debug.apk \
-                  --app ${{ secrets.FIREBASE_APP_ID_ANDROID }} \
-                  --groups "QA" \
-                  --release-notes "Dev build - ${{ github.sha }}"
-              env:
-                  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Upload to Firebase
+        run: |
+          firebase appdistribution:distribute \
+          android/app/build/outputs/apk/debug/app-debug.apk \
+          --app ${{ secrets.FIREBASE_APP_ID_ANDROID }} \
+          --groups "QA" \
+          --release-notes "Dev build - ${{ github.sha }}"
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
