@@ -17,10 +17,13 @@
     "prod:android-build": "cd android && cross-env ENVFILE=environments/.env.prod --mode=prodRelease ./gradlew assembleRelease",
     "dev:android-debugBuild": "cd android && cross-env ENVFILE=environments/.env.dev --mode=devRelease ./gradlew assembleDebug",
     "uat:android-debugBuild": "cd android && cross-env ENVFILE=environments/.env.uat --mode=uatRelease ./gradlew assembleDebug",
-    "prod:android-debugBuild": "cd android && cross-env ENVFILE=environments/.env.prod --mode=prodRelease ./gradlew assembleDebug"
+    "prod:android-debugBuild": "cd android && cross-env ENVFILE=environments/.env.prod --mode=prodRelease ./gradlew assembleDebug",
+    "dev:android-distribute": "npm run dev:android-build && firebase appdistribution:distribute android/app/build/outputs/apk/dev/debug/app-dev-debug.apk --app $FIREBASE_APP_ID_ANDROID --groups 'QA'"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.2",
+    "@react-native-firebase/app": "^23.8.6",
+    "@react-native-firebase/app-distribution": "^23.8.6",
     "@react-navigation/bottom-tabs": "^7.2.1",
     "@react-navigation/drawer": "^7.1.2",
     "@react-navigation/native": "^7.0.15",
@@ -34,10 +37,10 @@
     "react-native-mmkv": "^3.2.0",
     "react-native-reanimated": "^3.17.1",
     "react-native-safe-area-context": "^5.3.0",
-    "react-redux": "^9.2.0",
-    "redux-persist": "^6.0.0",
     "react-native-screens": "^4.9.1",
-    "react-native-toast-message": "^2.3.0"
+    "react-native-toast-message": "^2.3.0",
+    "react-redux": "^9.2.0",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
