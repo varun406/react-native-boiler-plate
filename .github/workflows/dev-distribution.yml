@@ -24,6 +24,13 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      # 3.5️⃣ Create Env File
+      - name: Create Env File
+        run: |
+          mkdir -p environments
+          echo "BASE_URL=${{ secrets.BASE_URL }}" >> environments/.env.dev
+          echo "ENV=${{ secrets.ENV }}" >> environments/.env.dev
+
       # 4️⃣ Setup Java for Android
       - name: Setup Java (Android)
         uses: actions/setup-java@v3
@@ -41,13 +48,13 @@ jobs:
           cd android
           chmod +x gradlew
           ./gradlew clean
-          ./gradlew assembleDebug
+          ENVFILE=../environments/.env.dev ./gradlew assembleDevDebug
 
       # 7️⃣ Upload to Firebase App Distribution
       - name: Upload to Firebase
         run: |
           firebase appdistribution:distribute \
-          android/app/build/outputs/apk/debug/app-debug.apk \
+          android/app/build/outputs/apk/dev/debug/app-dev-debug.apk \
           --app ${{ secrets.FIREBASE_APP_ID_ANDROID }} \
           --groups "QA" \
           --release-notes "Dev build - ${{ github.sha }}"
